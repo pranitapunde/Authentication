@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 import { loginUser } from '../features/Auth/athuSlice'
 
 const Loging = () => {
-// Getting Data from auth state
-  const { user, isSuccess ,isLoading,isError,message} = useSelector((state) => state.auth)
+  // Getting Data from auth state
+  const { user, isSuccess, isLoading, isError, message } = useSelector((state) => state.auth)
 
   // initial Sates
   const navigate = useNavigate()
@@ -15,11 +15,11 @@ const Loging = () => {
   // From Sate
   const [formDatalog, setFormDatalog] = useState({
     email: "",
-    password : ""
+    password: ""
   })
 
   // DisStructure State
-  const {email, password} = formDatalog
+  const { email, password } = formDatalog
 
   // From State Logic
 
@@ -38,44 +38,49 @@ const Loging = () => {
   }
 
   useEffect(() => {
-    if(user && isSuccess){
+    if (user && isSuccess) {
       navigate("/")
 
     }
-    if(isError && message){
+    if (isError && message) {
       toast.error(message)
     }
-  },[user, isSuccess, isError,message])
+  }, [user, isSuccess, isError, message])
 
 
-  if(isLoading){
+  if (isLoading) {
     return (
-      <h2 className='display-1 text-secondary text-center'> Loading...</h2>
+      
+      <div className='loading d-flex align-items-center justify-content-center w-100'>
+        <span className="spinner-border spinner-border-sm text-primary" aria-hidden="true"></span>
+        <span className="mx-2 text-primary fs-bold"role="status">Loading...</span>
+      </div>
+
     )
   }
 
   return (
     <div className='Login-section text-center '>
-        <div className='loging-Box bg-light border shadow-lg rounded'>
-       <div className=' loginHeading w-100 '>
-       <h5 className='text-primary ' > Login Page</h5>
-       </div>
-    
-       <form onSubmit={handleSubmit}>
-            <input type="email" name='email' placeholder='Enter your email' className='form-control rounded-0 my-3'
+      <div className='loging-Box bg-light border shadow-lg rounded'>
+        <div className=' loginHeading w-100 '>
+          <h5 className='text-primary ' > Login Page</h5>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <input type="email" name='email' placeholder='Enter your email' className='form-control rounded-0 my-3'
             onChange={handleChange}
-            value={email}/>
-            <input type="password" name='password' placeholder='Enter your password' className='form-control rounded-0 my-3'
+            value={email} />
+          <input type="password" name='password' placeholder='Enter your password' className='form-control rounded-0 my-3'
             onChange={handleChange}
-            value={password}/>
-            <button className='btn btn-success w-50 my-4'> Login</button>
+            value={password} />
+          <button className='btn btn-success w-50 my-4'> Login</button>
 
 
         </form>
-       
-        </div>
-    </div> 
-    
+
+      </div>
+    </div>
+
   )
 }
 

@@ -26,4 +26,7 @@ a{
 form{
   padding-inline: 20px;
 }
-
+/* loading */
+.loading{
+  height: 90vh;
+}
